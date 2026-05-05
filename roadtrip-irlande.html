@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>🍀 Road Trip Irlande — Juin 2025</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1a4a2e;
+    --green-mid: #2d6b47;
+    --green-light: #4a9666;
+    --gold: #c9963a;
+    --gold-light: #e8b85a;
+    --cream: #f7f3ec;
+    --cream-dark: #ede7db;
+    --text: #1c1c1c;
+    --text-muted: #6b6558;
+    --white: #ffffff;
+    --radius: 16px;
+    --shadow: 0 4px 24px rgba(26,74,46,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* HEADER */
+  .hero {
+    background: var(--green);
+    padding: 48px 20px 36px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 30% 0%, rgba(74,150,102,0.3) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 100%, rgba(201,150,58,0.2) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .hero-clover {
+    font-size: 52px;
+    display: block;
+    margin-bottom: 12px;
+    animation: sway 4s ease-in-out infinite;
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-title em {
+    color: var(--gold-light);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .hero-tags {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 400;
+  }
+
+  /* NAV TABS */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--white);
+    border-bottom: 1px solid var(--cream-dark);
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  .nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    flex-shrink: 0;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .nav-btn.active {
+    color: var(--green);
+    border-bottom-color: var(--green);
+  }
+
+  .nav-btn span {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 1px;
+  }
+
+  /* CONTENT */
+  .content {
+    padding: 0 16px 80px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* DAY VIEW */
+  .day-view { display: none; }
+  .day-view.active { display: block; }
+
+  .day-header {
+    padding: 24px 0 16px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .day-header-left {}
+
+  .day-num {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-light);
+    margin-bottom: 4px;
+  }
+
+  .day-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1.1;
+  }
+
+  .day-drive {
+    background: var(--cream-dark);
+    border-radius: 10px;
+    padding: 8px 12px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .day-drive-icon { font-size: 18px; display: block; }
+  .day-drive-text { font-size: 11px; color: var(--text-muted); font-weight: 400; white-space: nowrap; }
+
+  /* TIMELINE */
+  .timeline { position: relative; }
+
+  .tl-item {
+    display: flex;
+    gap: 14px;
+    padding-bottom: 6px;
+    position: relative;
+  }
+
+  .tl-left {
+    width: 50px;
+    flex-shrink: 0;
+    text-align: right;
+    padding-top: 3px;
+  }
+
+  .tl-time {
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--text-muted);
+    line-height: 1.2;
+  }
+
+  .tl-line-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 22px;
+    flex-shrink: 0;
+  }
+
+  .tl-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .dot-morning  { background: var(--green-light); }
+  .dot-afternoon{ background: var(--gold); }
+  .dot-evening  { background: #7c5bbf; }
+  .dot-info     { background: #9db8aa; }
+
+  .tl-vline {
+    width: 1.5px;
+    background: var(--cream-dark);
+    flex: 1;
+    margin-top: 3px;
+    min-height: 18px;
+  }
+
+  .tl-body {
+    flex: 1;
+    padding-bottom: 16px;
+  }
+
+  .tl-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+  }
+
+  .tl-places {}
+
+  .tl-place {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1.5;
+    padding: 2px 0;
+  }
+
+  .tl-note {
+    margin-top: 5px;
+    font-size: 12.5px;
+    color: var(--green-mid);
+    background: rgba(45,107,71,0.07);
+    border-left: 2px solid var(--green-light);
+    padding: 6px 10px;
+    border-radius: 0 6px 6px 0;
+    line-height: 1.45;
+  }
+
+  /* NIGHT CARD */
+  .night-card {
+    margin-top: 8px;
+    background: var(--green);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .night-moon { font-size: 22px; }
+
+  .night-info {}
+  .night-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .night-place { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--white); }
+
+  /* HOTEL CARD */
+  .hotel-card {
+    margin-top: 8px;
+    background: var(--green);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .hotel-main {
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hotel-moon { font-size: 22px; }
+
+  .hotel-info { flex: 1; }
+  .hotel-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+  .hotel-city { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--white); line-height: 1.1; }
+  .hotel-name { font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 2px; font-weight: 300; }
+
+  .hotel-checkin {
+    display: flex;
+    gap: 14px;
+    padding: 0 16px 12px;
+  }
+
+  .hotel-checkin-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .hci-label { font-size: 9px; font-weight: 500; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+  .hci-time { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.85); }
+  .hci-sep { font-size: 18px; color: rgba(255,255,255,0.2); margin-top: 8px; }
+
+  .hotel-status {
+    background: rgba(0,0,0,0.2);
+    padding: 7px 16px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hotel-status.confirmed { color: #7de8a8; }
+  .hotel-status.pending { color: var(--gold-light); }
+
+  /* BIRTHDAY CARD */
+  .birthday-card {
+    margin: 20px 0 8px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a4a2e 0%, #2d6b47 50%, #1a4a2e 100%);
+    position: relative;
+    padding: 22px 18px;
+    text-align: center;
+  }
+
+  .birthday-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(201,150,58,0.25) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(74,150,102,0.3) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  .bday-emoji { font-size: 40px; display: block; margin-bottom: 10px; animation: sway 3s ease-in-out infinite; }
+  .bday-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 700; color: var(--gold-light); line-height: 1.1; margin-bottom: 8px; position: relative; }
+  .bday-text { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; position: relative; font-weight: 300; }
+
+  /* TIPS SECTION */
+  .tips-section {
+    margin-top: 28px;
+    padding: 20px 18px;
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .tips-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .tip-item {
+    display: flex;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .tip-item:last-child { border-bottom: none; }
+  .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  /* OVERVIEW TAB */
+  .overview-list { padding-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+
+  .ov-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 2px 10px rgba(26,74,46,0.07);
+    cursor: pointer;
+    transition: transform 0.15s;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .ov-card:active { transform: scale(0.98); }
+
+  .ov-day-badge {
+    background: var(--green);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 9px;
+    border-radius: 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .ov-info { flex: 1; }
+  .ov-date { font-size: 11px; color: var(--text-muted); }
+  .ov-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--green); line-height: 1.1; }
+  .ov-stops { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .ov-arrow { color: var(--gold); font-size: 18px; flex-shrink: 0; }
+
+  /* INFOS TAB */
+  .info-section { padding-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+
+  .info-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(26,74,46,0.07);
+  }
+
+  .info-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .info-row {
+    display: flex;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--cream-dark);
+    font-size: 13.5px;
+    align-items: flex-start;
+  }
+
+  .info-row:last-child { border-bottom: none; }
+  .info-key { color: var(--text-muted); min-width: 110px; flex-shrink: 0; font-weight: 400; }
+  .info-val { color: var(--text); font-weight: 400; line-height: 1.45; }
+  .info-val strong { font-weight: 500; color: var(--green-mid); }
+
+  .alert-card {
+    background: #fff8ed;
+    border: 1px solid #f0d49a;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #7a5a1a;
+    line-height: 1.5;
+    display: flex;
+    gap: 10px;
+  }
+
+  .alert-icon { font-size: 18px; flex-shrink: 0; }
+
+  /* BOTTOM PADDING */
+  .spacer { height: 20px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-clover">🍀</span>
+  <h1 class="hero-title">Road Trip<br><em>Irlande</em></h1>
+  <p class="hero-subtitle">6 → 12 Juin · 7 jours</p>
+  <div class="hero-tags">
+    <span class="tag">✈️ Vol 19h15</span>
+    <span class="tag">🚗 ~1 500 km</span>
+    <span class="tag">👬 En frères</span>
+  </div>
+</div>
+
+<nav class="nav" id="nav">
+  <button class="nav-btn active" onclick="showTab('overview')" id="tab-overview"><span>🗺️</span>Aperçu</button>
+  <button class="nav-btn" onclick="showTab('j1')" id="tab-j1"><span>1</span>Dublin</button>
+  <button class="nav-btn" onclick="showTab('j2')" id="tab-j2"><span>2</span>Wicklow</button>
+  <button class="nav-btn" onclick="showTab('j3')" id="tab-j3"><span>3</span>Cashel</button>
+  <button class="nav-btn" onclick="showTab('j4')" id="tab-j4"><span>4</span>Kerry</button>
+  <button class="nav-btn" onclick="showTab('j5')" id="tab-j5"><span>5</span>Moher</button>
+  <button class="nav-btn" onclick="showTab('j6')" id="tab-j6"><span>6</span>Connemara</button>
+  <button class="nav-btn" onclick="showTab('j7')" id="tab-j7"><span>7</span>Retour</button>
+  <button class="nav-btn" onclick="showTab('infos')" id="tab-infos"><span>ℹ️</span>Infos</button>
+</nav>
+
+<div class="content">
+
+  <!-- APERÇU -->
+  <div class="day-view active" id="view-overview">
+    <div class="overview-list">
+      <button class="ov-card" onclick="showTab('j1')">
+        <span class="ov-day-badge">Jour 1<br>6 juin</span>
+        <div class="ov-info">
+          <div class="ov-date">Vendredi</div>
+          <div class="ov-title">Dublin</div>
+          <div class="ov-stops">Trinity · St Stephen's · Guinness · Temple Bar</div>
+        </div>
+        <span class="ov-arrow">›</span>
+      </button>
+      <button class="ov-card" onclick="showTab('j2')">
+        <span class="ov-day-badge">Jour 2<br>7 juin</span>
+        <div class="ov-info">
+          <div class="ov-date">Samedi · 🚗 ~3h · 🎂 18 ans !</div>
+          <div class="ov-title">Wicklow → Kilkenny</div>
+          <div class="ov-stops">Powerscourt · Sally Gap · Lough Tay · Glendalough</div>
+        </div>
+        <span class="ov-arrow">›</span>
+      </button>
+      <button class="ov-card" onclick="showTab('j3')">
+        <span class="ov-day-badge">Jour 3<br>8 juin</span>
+        <div class="ov-info">
+          <div class="ov-date">Dimanche · 🚗 ~3h30</div>
+          <div class="ov-title">Cashel → Killarney</div>
+          <div class="ov-stops">Rock of Cashel · Hore Abbey · Killarney NP</div>
+        </div>
+        <span class="ov-arrow">›</span>
+      </button>
+      <button class="ov-card" onclick="showTab('j4')">
+        <span class="ov-day-badge">Jour 4<br>9 juin</span>
+        <div class="ov-info">
+          <div class="ov-date">Lundi · 🚗 ~4h avec arrêts</div>
+          <div class="ov-title">Ring of Kerry → Dingle</div>
+          <div class="ov-stops">Ring of Kerry · Conor Pass · Slea Head Drive</div>
+        </div>
+        <span class="ov-arrow">›</span>
+      </button>
+      <button class="ov-card" onclick="showTab('j5')">
+        <span class="ov-day-badge">Jour 5<br>10 juin</span>
+        <div class="ov-info">
+          <div class="ov-date">Mardi · 🚗 ~3h30</div>
+          <div class="ov-title">Moher → Galway</div>
+          <div class="ov-stops">Cliffs of Moher · Burren · Poulnabrone · Galway</div>
+        </div>
+        <span class="ov-arrow">›</span>
+      </button>
+      <button class="ov-card" onclick="showTab('j6')">
+        <span class="ov-day-badge">Jour 6<br>11 juin</span>
+        <div class="ov-info">
+          <div class="ov-date">Mercredi · 🚗 ~2h</div>
+          <div class="ov-title">Connemara</div>
+          <div class="ov-stops">Diamond Hill · Kylemore Abbey · Sky Road</div>
+        </div>
+        <span class="ov-arrow">›</span>
+      </button>
+      <button class="ov-card" onclick="showTab('j7')">
+        <span class="ov-day-badge">Jour 7<br>12 juin</span>
+        <div class="ov-info">
+          <div class="ov-date">Jeudi · 🚗 ~3h · ✈️ 19h15</div>
+          <div class="ov-title">Retour Dublin</div>
+          <div class="ov-stops">Clonmacnoise (opt.) · Dublin Airport</div>
+        </div>
+        <span class="ov-arrow">›</span>
+      </button>
+    </div>
+    <div class="tips-section" style="margin-top:20px;">
+      <div class="tips-title">⚡ Points de vigilance</div>
+      <div class="tip-item"><span class="tip-icon">🔴</span><span><strong>Jour 4</strong> – Journée la plus chargée. Ring of Kerry + Conor Pass + Slea Head : sois discipliné sur les arrêts.</span></div>
+      <div class="tip-item"><span class="tip-icon">🟡</span><span><strong>Jour 2</strong> – L'enchaînement Powerscourt → Sally Gap → Glendalough est serré. Pars à 8h pile.</span></div>
+      <div class="tip-item"><span class="tip-icon">🟡</span><span><strong>Jour 7</strong> – Clonmacnoise est optionnel si tu veux de la marge avant le vol 19h15.</span></div>
+      <div class="tip-item"><span class="tip-icon">🟢</span><span>Les jours sont très longs en juin (lever 5h, coucher 22h). Profites-en pour les paysages du soir !</span></div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- JOUR 1 -->
+  <div class="day-view" id="view-j1">
+    <div class="birthday-card">
+      <span class="bday-emoji">🎂</span>
+      <div class="bday-title">Joyeux 18 ans mon frère !</div>
+      <div class="bday-text">Quoi de mieux que de fêter tes 18 ans en Irlande ?<br>Ce road trip, c'est mon cadeau — profite de chaque instant. 🍀</div>
+    </div>
+    <div class="day-header">
+      <div class="day-header-left">
+        <div class="day-num">Jour 1 · Vendredi 6 juin</div>
+        <div class="day-title">Dublin</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">06h55</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Arrivée</div>
+          <div class="tl-places"><div class="tl-place">✈️ Atterrissage à Dublin</div></div>
+          <div class="tl-note">Transfer vers le centre · petit-déjeuner</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">09h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-morning"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Matin</div>
+          <div class="tl-places">
+            <div class="tl-place">🎓 Trinity College Dublin</div>
+            <div class="tl-place">🌳 St Stephen's Green</div>
+          </div>
+          <div class="tl-note">~2h — balade tranquille après le vol</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">11h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Déjeuner</div>
+          <div class="tl-places"><div class="tl-place">🍽️ Déjeuner en ville</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">13h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Après-midi</div>
+          <div class="tl-places">
+            <div class="tl-place">🍺 Guinness Storehouse</div>
+            <div class="tl-place">&nbsp;&nbsp;&nbsp;— ou —</div>
+            <div class="tl-place">🥃 Jameson Distillery Bow St.</div>
+          </div>
+          <div class="tl-note">⚠️ Réserve en avance — complet en juin ! Compter ~2h.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">16h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Check-in hôtel</div>
+          <div class="tl-places"><div class="tl-place">🏨 Gardiner House Hostel · dépôt des bagages</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">18h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-evening"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Début de soirée</div>
+          <div class="tl-places">
+            <div class="tl-place">🍻 Temple Bar — ambiance de rue</div>
+            <div class="tl-place">🎶 Pub + musique live</div>
+          </div>
+          <div class="tl-note">Dîner dans le quartier avant le casino</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">21h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-evening"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Soirée</div>
+          <div class="tl-places">
+            <div class="tl-place">🎰 Casino Dublin</div>
+          </div>
+          <div class="tl-note">Pensez à une pièce d'identité — obligatoire à l'entrée.</div>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-main">
+        <span class="hotel-moon">🛏️</span>
+        <div class="hotel-info">
+          <div class="hotel-label">Nuit 1 · Dublin</div>
+          <div class="hotel-city">Gardiner House Hostel</div>
+          <div class="hotel-name">6 → 7 juin · 2 hébergements</div>
+        </div>
+      </div>
+      <div class="hotel-checkin">
+        <div class="hotel-checkin-item"><span class="hci-label">Check-in</span><span class="hci-time">À partir de 14h</span></div>
+        <span class="hci-sep">·</span>
+        <div class="hotel-checkin-item"><span class="hci-label">Check-out</span><span class="hci-time">Avant 11h</span></div>
+      </div>
+      <div class="hotel-status confirmed">✔ Confirmé · Non remboursable</div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- JOUR 2 -->
+  <div class="day-view" id="view-j2">
+    <div class="day-header">
+      <div class="day-header-left">
+        <div class="day-num">Jour 2 · Samedi 7 juin</div>
+        <div class="day-title">Wicklow →<br>Kilkenny</div>
+      </div>
+      <div class="day-drive"><span class="day-drive-icon">🚗</span><span class="day-drive-text">~3h cumulées</span></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">08h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Départ</div>
+          <div class="tl-places"><div class="tl-place">🚗 Récupération de la voiture</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">09h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-morning"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Matin — Wicklow</div>
+          <div class="tl-places">
+            <div class="tl-place">🌿 Powerscourt Estate</div>
+            <div class="tl-place">🏔️ Sally Gap</div>
+            <div class="tl-place">💧 Lough Tay</div>
+            <div class="tl-place">🌊 Glenmacnass Waterfall (stop rapide)</div>
+          </div>
+          <div class="tl-note">⚠️ Enchaînement serré — pars à l'heure !</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">13h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Après-midi</div>
+          <div class="tl-places"><div class="tl-place">🥾 Glendalough — rando ~1h30</div></div>
+          <div class="tl-note">Vallée monastique magnifique. Prévois 2h sur place.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">16h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Route</div>
+          <div class="tl-places"><div class="tl-place">🚗 Départ vers Kilkenny</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">18h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-evening"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Soir</div>
+          <div class="tl-places">
+            <div class="tl-place">🏰 Arrivée Kilkenny + château</div>
+            <div class="tl-place">🍺 Soirée en ville</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-main">
+        <span class="hotel-moon">🛏️</span>
+        <div class="hotel-info">
+          <div class="hotel-label">Nuit 2 · Kilkenny</div>
+          <div class="hotel-city">The Orchard House</div>
+          <div class="hotel-name">7 → 8 juin</div>
+        </div>
+      </div>
+      <div class="hotel-checkin">
+        <div class="hotel-checkin-item"><span class="hci-label">Check-in</span><span class="hci-time">15h – 18h</span></div>
+        <span class="hci-sep">·</span>
+        <div class="hotel-checkin-item"><span class="hci-label">Check-out</span><span class="hci-time">Avant 11h</span></div>
+      </div>
+      <div class="hotel-status confirmed">✔ Confirmé · Annulation gratuite</div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- JOUR 3 -->
+  <div class="day-view" id="view-j3">
+    <div class="day-header">
+      <div class="day-header-left">
+        <div class="day-num">Jour 3 · Dimanche 8 juin</div>
+        <div class="day-title">Cashel →<br>Killarney</div>
+      </div>
+      <div class="day-drive"><span class="day-drive-icon">🚗</span><span class="day-drive-text">~3h30</span></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">08h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Départ</div>
+          <div class="tl-places"><div class="tl-place">🚗 Départ de Kilkenny</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">10h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-morning"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Matin — Cashel</div>
+          <div class="tl-places">
+            <div class="tl-place">🏰 Rock of Cashel</div>
+            <div class="tl-place">⛪ Hore Abbey</div>
+          </div>
+          <div class="tl-note">Forteresse médiévale spectaculaire. Prévois 1h30.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">14h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Après-midi — Killarney</div>
+          <div class="tl-places">
+            <div class="tl-place">🌲 Killarney National Park</div>
+            <div class="tl-place">🌊 Torc Waterfall</div>
+            <div class="tl-place">⛪ Muckross Abbey</div>
+            <div class="tl-place">👁️ Ladies View</div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">Soir</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-evening"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Soir</div>
+          <div class="tl-places"><div class="tl-place">🏘️ Centre-ville de Killarney</div></div>
+          <div class="tl-note">Très touristique en juin, mais le parc reste superbe.</div>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-main">
+        <span class="hotel-moon">🛏️</span>
+        <div class="hotel-info">
+          <div class="hotel-label">Nuit 3 · Killarney</div>
+          <div class="hotel-city">19th Green Guesthouse</div>
+          <div class="hotel-name">8 → 9 juin</div>
+        </div>
+      </div>
+      <div class="hotel-checkin">
+        <div class="hotel-checkin-item"><span class="hci-label">Check-in</span><span class="hci-time">À partir de 15h</span></div>
+        <span class="hci-sep">·</span>
+        <div class="hotel-checkin-item"><span class="hci-label">Check-out</span><span class="hci-time">Avant 11h</span></div>
+      </div>
+      <div class="hotel-status confirmed">✔ Confirmé · Annulation gratuite</div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- JOUR 4 -->
+  <div class="day-view" id="view-j4">
+    <div class="day-header">
+      <div class="day-header-left">
+        <div class="day-num">Jour 4 · Lundi 9 juin</div>
+        <div class="day-title">Ring of Kerry →<br>Dingle</div>
+      </div>
+      <div class="day-drive"><span class="day-drive-icon">🚗</span><span class="day-drive-text">~4h arrêts</span></div>
+    </div>
+    <div class="alert-card" style="margin-bottom:16px;">
+      <span class="alert-icon">⚠️</span>
+      <span>Journée la plus chargée du voyage. Sois discipliné sur les arrêts du Ring. Si tu prends du retard, priorise Conor Pass + Slea Head sur le Ring.</span>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">08h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-morning"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Matin — Ring of Kerry</div>
+          <div class="tl-places">
+            <div class="tl-place">🏖️ Ring of Kerry complet</div>
+            <div class="tl-place">🌊 Waterville, plages…</div>
+          </div>
+          <div class="tl-note">~3h de route minimum sans les arrêts.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">14h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Après-midi — Dingle</div>
+          <div class="tl-places">
+            <div class="tl-place">🏔️ Conor Pass</div>
+            <div class="tl-place">🛣️ Slea Head Drive</div>
+            <div class="tl-place">⚓ Dunquin Pier</div>
+            <div class="tl-place">🏖️ Coumeenoole Beach</div>
+          </div>
+          <div class="tl-note">Plus beau et moins touristique que le Ring de Kerry !</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">Soir</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-evening"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Soir</div>
+          <div class="tl-places"><div class="tl-place">🎶 Dingle — super ambiance de pub</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-main">
+        <span class="hotel-moon">🛏️</span>
+        <div class="hotel-info">
+          <div class="hotel-label">Nuit 4 · Dingle</div>
+          <div class="hotel-city">Coastguard Lodge</div>
+          <div class="hotel-name">9 → 10 juin</div>
+        </div>
+      </div>
+      <div class="hotel-checkin">
+        <div class="hotel-checkin-item"><span class="hci-label">Check-in</span><span class="hci-time">À partir de 15h</span></div>
+        <span class="hci-sep">·</span>
+        <div class="hotel-checkin-item"><span class="hci-label">Check-out</span><span class="hci-time">Avant 11h</span></div>
+      </div>
+      <div class="hotel-status confirmed">✔ Confirmé · Annulation gratuite</div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- JOUR 5 -->
+  <div class="day-view" id="view-j5">
+    <div class="day-header">
+      <div class="day-header-left">
+        <div class="day-num">Jour 5 · Mardi 10 juin</div>
+        <div class="day-title">Cliffs of Moher →<br>Galway</div>
+      </div>
+      <div class="day-drive"><span class="day-drive-icon">🚗</span><span class="day-drive-text">~3h30</span></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">08h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Départ</div>
+          <div class="tl-places"><div class="tl-place">🚗 Départ de Dingle (~2h30 jusqu'aux falaises)</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">11h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-morning"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Matin</div>
+          <div class="tl-places"><div class="tl-place">🏔️ Cliffs of Moher</div></div>
+          <div class="tl-note">⚠️ Très fréquenté en juin. Arrive tôt. Prévois 1h30 minimum.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">13h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Après-midi — The Burren</div>
+          <div class="tl-places">
+            <div class="tl-place">🪨 Poulnabrone Dolmen</div>
+            <div class="tl-place">🌿 The Burren</div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">16h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Fin d'après-midi</div>
+          <div class="tl-places"><div class="tl-place">🏰 Dunguaire Castle (photo)</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">17h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-evening"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Soir</div>
+          <div class="tl-places">
+            <div class="tl-place">🏙️ Arrivée Galway</div>
+            <div class="tl-place">🎶 Soirée en ville</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-main">
+        <span class="hotel-moon">🛏️</span>
+        <div class="hotel-info">
+          <div class="hotel-label">Nuit 5 · Galway</div>
+          <div class="hotel-city">À réserver</div>
+          <div class="hotel-name">10 → 11 juin</div>
+        </div>
+      </div>
+      <div class="hotel-status pending">⏳ Hébergement manquant</div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- JOUR 6 -->
+  <div class="day-view" id="view-j6">
+    <div class="day-header">
+      <div class="day-header-left">
+        <div class="day-num">Jour 6 · Mercredi 11 juin</div>
+        <div class="day-title">Connemara</div>
+      </div>
+      <div class="day-drive"><span class="day-drive-icon">🚗</span><span class="day-drive-text">~2h calme</span></div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">09h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-morning"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Matin</div>
+          <div class="tl-places">
+            <div class="tl-place">🏔️ Connemara National Park</div>
+            <div class="tl-place">🥾 Diamond Hill — ~2h de rando</div>
+          </div>
+          <div class="tl-note">Panorama sauvage incroyable depuis le sommet.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">14h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Après-midi</div>
+          <div class="tl-places"><div class="tl-place">🏰 Kylemore Abbey</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">16h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Fin d'après-midi</div>
+          <div class="tl-places">
+            <div class="tl-place">🛣️ Sky Road</div>
+            <div class="tl-place">🌊 Killary Harbour</div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">Soir</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-evening"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Soir</div>
+          <div class="tl-places"><div class="tl-place">🌿 Nature calme — repos bien mérité</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-main">
+        <span class="hotel-moon">🛏️</span>
+        <div class="hotel-info">
+          <div class="hotel-label">Nuit 6 · Clifden</div>
+          <div class="hotel-city">Clifden Station House Hotel</div>
+          <div class="hotel-name">11 → 12 juin</div>
+        </div>
+      </div>
+      <div class="hotel-checkin">
+        <div class="hotel-checkin-item"><span class="hci-label">Check-in</span><span class="hci-time">À partir de 15h</span></div>
+        <span class="hci-sep">·</span>
+        <div class="hotel-checkin-item"><span class="hci-label">Check-out</span><span class="hci-time">Avant 11h</span></div>
+      </div>
+      <div class="hotel-status confirmed">✔ Confirmé · Déjà payé</div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- JOUR 7 -->
+  <div class="day-view" id="view-j7">
+    <div class="day-header">
+      <div class="day-header-left">
+        <div class="day-num">Jour 7 · Jeudi 12 juin</div>
+        <div class="day-title">Retour Dublin ✈️</div>
+      </div>
+      <div class="day-drive"><span class="day-drive-icon">🚗</span><span class="day-drive-text">~3h</span></div>
+    </div>
+    <div class="alert-card" style="margin-bottom:16px;">
+      <span class="alert-icon">✈️</span>
+      <span>Vol à <strong>19h15</strong>. Clonmacnoise est optionnel. Si tu le sautes, tu arrives à l'aéroport largement à l'avance.</span>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">09h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Départ</div>
+          <div class="tl-places"><div class="tl-place">🚗 Départ de Clifden</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">11h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-morning"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Matin (optionnel)</div>
+          <div class="tl-places"><div class="tl-place">⛪ Clonmacnoise</div></div>
+          <div class="tl-note">Site monastique du VIe s. Magnifique, mais ~2h45 de Clifden.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">13h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Déjeuner</div>
+          <div class="tl-places"><div class="tl-place">🍽️ Déjeuner en route</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">15h30</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Route</div>
+          <div class="tl-places"><div class="tl-place">🚗 Route vers Dublin Airport</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">17h00</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Aéroport</div>
+          <div class="tl-places"><div class="tl-place">✈️ Arrivée Dublin Airport</div></div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-left"><span class="tl-time">19h15</span></div>
+        <div class="tl-line-col"><div class="tl-dot dot-evening"></div></div>
+        <div class="tl-body">
+          <div class="tl-label">Vol</div>
+          <div class="tl-places"><div class="tl-place">🛫 Départ — bon voyage !</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+  <!-- INFOS -->
+  <div class="day-view" id="view-infos">
+    <div class="info-section">
+      <div class="info-card">
+        <div class="info-card-title">🛫 Vol & Logistique</div>
+        <div class="info-row"><span class="info-key">Arrivée</span><span class="info-val">6 juin à <strong>06h55</strong></span></div>
+        <div class="info-row"><span class="info-key">Départ</span><span class="info-val">12 juin à <strong>19h15</strong> — arriver à 17h00</span></div>
+        <div class="info-row"><span class="info-key">Voiture</span><span class="info-val">Récupération le 7 juin à <strong>08h00</strong></span></div>
+        <div class="info-row"><span class="info-key">Conduite</span><span class="info-val">À <strong>gauche</strong> ! Routes étroites en campagne.</span></div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">💰 Budget & Pratique</div>
+        <div class="info-row"><span class="info-key">Monnaie</span><span class="info-val">Euro (€)</span></div>
+        <div class="info-row"><span class="info-key">Météo juin</span><span class="info-val">15–18°C, pluies fréquentes. <strong>Imperméable indispensable.</strong></span></div>
+        <div class="info-row"><span class="info-key">Jours</span><span class="info-val">Lever 5h, coucher 22h — lumière incroyable !</span></div>
+        <div class="info-row"><span class="info-key">Entrées</span><span class="info-val">Guinness/Jameson : 20–25€. Cliffs of Moher : 8€. Rock of Cashel : 10€.</span></div>
+        <div class="info-row"><span class="info-key">Pourboires</span><span class="info-val">10–15% au restaurant, arrondi au pub.</span></div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">📱 Apps utiles</div>
+        <div class="info-row"><span class="info-key">GPS</span><span class="info-val">Google Maps ou Waze (télécharge les cartes offline !)</span></div>
+        <div class="info-row"><span class="info-key">Météo</span><span class="info-val">Met Éireann (météo officielle irlandaise)</span></div>
+        <div class="info-row"><span class="info-key">Pubs</span><span class="info-val">Lovin Dublin pour les bons spots</span></div>
+        <div class="info-row"><span class="info-key">Urgences</span><span class="info-val"><strong>112</strong> ou <strong>999</strong></span></div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-card-title">🏨 Hébergements</div>
+        <div class="info-row"><span class="info-key">Nuit 1 · Dublin</span><span class="info-val"><strong>Gardiner House Hostel</strong><br>Non remboursable ✔</span></div>
+        <div class="info-row"><span class="info-key">Nuit 2 · Kilkenny</span><span class="info-val"><strong>The Orchard House</strong><br>Check-in 15h–18h · Annulation gratuite ✔</span></div>
+        <div class="info-row"><span class="info-key">Nuit 3 · Killarney</span><span class="info-val"><strong>19th Green Guesthouse</strong><br>Annulation gratuite ✔</span></div>
+        <div class="info-row"><span class="info-key">Nuit 4 · Dingle</span><span class="info-val"><strong>Coastguard Lodge</strong><br>Annulation gratuite ✔</span></div>
+        <div class="info-row" style="background: #fff8ed; margin: 0 -18px; padding: 8px 18px; border-left: 3px solid #f0d49a;"><span class="info-key" style="color:#9a6c10;">Nuit 5 · Galway</span><span class="info-val" style="color:#9a6c10;"><strong>⏳ À réserver !</strong></span></div>
+        <div class="info-row"><span class="info-key">Nuit 6 · Clifden</span><span class="info-val"><strong>Clifden Station House Hotel</strong><br>Déjà payé ✔</span></div>
+      </div>
+
+      <div class="alert-card">
+        <span class="alert-icon">⚠️</span>
+        <span>Réserve le Guinness Storehouse à l'avance ! En juin, les créneaux se remplissent très vite.</span>
+      </div>
+    </div>
+    <div class="spacer"></div>
+  </div>
+
+</div>
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.day-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + id).classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // scroll nav btn into view
+  const btn = document.getElementById('tab-' + id);
+  btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+</script>
+</body>
+</html>
