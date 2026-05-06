@@ -495,6 +495,91 @@
 
   .alert-icon { font-size: 18px; flex-shrink: 0; }
 
+  /* TICKET */
+  .ticket {
+    margin: 8px 0 4px;
+    background: #1a0a0a;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .ticket::before, .ticket::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--cream);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  .ticket::before { left: -10px; }
+  .ticket::after { right: -10px; }
+
+  .ticket-top {
+    padding: 14px 18px 10px;
+  }
+
+  .ticket-ref {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .ticket-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+
+  .ticket-date {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 4px;
+  }
+
+  .ticket-type {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #c9963a;
+    border: 1px solid #c9963a;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  .ticket-divider {
+    border: none;
+    border-top: 1.5px dashed rgba(255,255,255,0.15);
+    margin: 0 18px;
+  }
+
+  .ticket-bottom {
+    padding: 10px 18px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .ticket-count {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.5;
+  }
+
+  .ticket-count strong { color: rgba(255,255,255,0.85); font-size: 14px; display: block; }
+
+  .ticket-logo { font-size: 28px; opacity: 0.85; }
+
   /* CHECKLIST */
   .checklist-section { padding-top: 20px; display: flex; flex-direction: column; gap: 14px; }
 
@@ -745,7 +830,7 @@
         </div>
       </div>
       <div class="tl-item">
-        <div class="tl-left"><span class="tl-time">11h30</span></div>
+        <div class="tl-left"><span class="tl-time">13h00</span></div>
         <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
         <div class="tl-body">
           <div class="tl-label">Déjeuner</div>
@@ -753,16 +838,14 @@
         </div>
       </div>
       <div class="tl-item">
-        <div class="tl-left"><span class="tl-time">13h30</span></div>
+        <div class="tl-left"><span class="tl-time">14h30</span></div>
         <div class="tl-line-col"><div class="tl-dot dot-afternoon"></div><div class="tl-vline"></div></div>
         <div class="tl-body">
-          <div class="tl-label">Après-midi</div>
+          <div class="tl-label">Après-midi — Réservé ✔</div>
           <div class="tl-places">
-            <div class="tl-place">🍺 Guinness Storehouse</div>
-            <div class="tl-place">&nbsp;&nbsp;&nbsp;— ou —</div>
-            <div class="tl-place">🥃 Jameson Distillery Bow St.</div>
+            <div class="tl-place">🍺 Guinness Storehouse — STOUTIE</div>
           </div>
-          <div class="tl-note">⚠️ Réserve en avance — complet en juin ! Compter ~2h.</div>
+          <div class="tl-note">Réf. 904105918 · 2 tickets Adult (18+) · ~2h</div>
         </div>
       </div>
       <div class="tl-item">
@@ -812,6 +895,22 @@
         <div class="hotel-checkin-item"><span class="hci-label">Check-out</span><span class="hci-time">Avant 11h</span></div>
       </div>
       <div class="hotel-status confirmed">✔ Confirmé · Non remboursable</div>
+    </div>
+
+    <div style="margin-top:12px;margin-bottom:4px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);">🎟️ Billets</div>
+
+    <div class="ticket">
+      <div class="ticket-top">
+        <div class="ticket-ref">Booking ref · 904105918</div>
+        <div class="ticket-name">STOUTIE</div>
+        <div class="ticket-date">Samedi 6 juin 2026 · 14h30</div>
+        <span class="ticket-type">ADULT (18+)</span>
+      </div>
+      <hr class="ticket-divider">
+      <div class="ticket-bottom">
+        <div class="ticket-count"><strong>× 2 tickets</strong>Guinness Storehouse</div>
+        <span class="ticket-logo">🍺</span>
+      </div>
     </div>
     <div class="spacer"></div>
   </div>
@@ -1284,7 +1383,7 @@
 
       <div class="alert-card">
         <span class="alert-icon">⚠️</span>
-        <span>Réserve le Guinness Storehouse à l'avance ! En juin, les créneaux se remplissent très vite.</span>
+        <span>Hébergement manquant à <strong>Galway</strong> (nuit du 10 au 11 juin) — à réserver dès que possible !</span>
       </div>
     </div>
     <div class="spacer"></div>
@@ -1322,7 +1421,7 @@
       <div class="check-card">
         <div class="check-card-title">📱 Avant de partir</div>
         <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Télécharger Google Maps offline Irlande</span></div>
-        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Réserver Guinness ou Jameson</span></div>
+        <div class="check-item done" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Réserver Guinness Storehouse ✔</span></div>
         <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Réserver hôtel Galway</span></div>
         <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Prévenir sa banque pour l'étranger</span></div>
       </div>
