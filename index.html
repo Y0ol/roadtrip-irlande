@@ -495,6 +495,111 @@
 
   .alert-icon { font-size: 18px; flex-shrink: 0; }
 
+  /* CHECKLIST */
+  .checklist-section { padding-top: 20px; display: flex; flex-direction: column; gap: 14px; }
+
+  .check-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 2px 10px rgba(26,74,46,0.07);
+  }
+
+  .check-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--green);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--cream-dark);
+    cursor: pointer;
+    transition: opacity 0.2s;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .check-item:last-child { border-bottom: none; }
+
+  .check-item input[type="checkbox"] { display: none; }
+
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid var(--green-light);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: var(--white);
+  }
+
+  .check-item.done .check-box {
+    background: var(--green-light);
+    border-color: var(--green-light);
+  }
+
+  .check-tick {
+    display: none;
+    color: white;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .check-item.done .check-tick { display: block; }
+
+  .check-label {
+    font-size: 14px;
+    color: var(--text);
+    flex: 1;
+    line-height: 1.4;
+    transition: all 0.2s;
+  }
+
+  .check-item.done .check-label {
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  .check-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .check-bar {
+    flex: 1;
+    height: 4px;
+    background: var(--cream-dark);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .check-bar-fill {
+    height: 100%;
+    background: var(--green-light);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .check-count {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
   /* BOTTOM PADDING */
   .spacer { height: 20px; }
 </style>
@@ -522,6 +627,7 @@
   <button class="nav-btn" onclick="showTab('j6')" id="tab-j6"><span>6</span>Connemara</button>
   <button class="nav-btn" onclick="showTab('j7')" id="tab-j7"><span>7</span>Retour</button>
   <button class="nav-btn" onclick="showTab('infos')" id="tab-infos"><span>ℹ️</span>Infos</button>
+  <button class="nav-btn" onclick="showTab('checklist')" id="tab-checklist"><span>✅</span>Check</button>
 </nav>
 
 <div class="content">
@@ -623,7 +729,7 @@
         <div class="tl-body">
           <div class="tl-label">Arrivée</div>
           <div class="tl-places"><div class="tl-place">✈️ Atterrissage à Dublin</div></div>
-          <div class="tl-note">Transfer vers le centre · petit-déjeuner</div>
+          <div class="tl-note">Récupération voiture Flizzr à l'aéroport · puis transfer vers le centre</div>
         </div>
       </div>
       <div class="tl-item">
@@ -725,7 +831,7 @@
         <div class="tl-line-col"><div class="tl-dot dot-info"></div><div class="tl-vline"></div></div>
         <div class="tl-body">
           <div class="tl-label">Départ</div>
-          <div class="tl-places"><div class="tl-place">🚗 Récupération de la voiture</div></div>
+          <div class="tl-places"><div class="tl-place">🚗 Départ vers Wicklow</div></div>
         </div>
       </div>
       <div class="tl-item">
@@ -1145,7 +1251,7 @@
         <div class="info-card-title">🛫 Vol & Logistique</div>
         <div class="info-row"><span class="info-key">Arrivée</span><span class="info-val">6 juin à <strong>06h55</strong></span></div>
         <div class="info-row"><span class="info-key">Départ</span><span class="info-val">12 juin à <strong>19h15</strong> — arriver à 17h00</span></div>
-        <div class="info-row"><span class="info-key">Voiture</span><span class="info-val">Récupération le 7 juin à <strong>08h00</strong></span></div>
+        <div class="info-row"><span class="info-key">Voiture</span><span class="info-val">Récupération le 6 juin à <strong>06h55</strong> · <strong>Flizzr</strong> (aéroport de Dublin)</span></div>
         <div class="info-row"><span class="info-key">Conduite</span><span class="info-val">À <strong>gauche</strong> ! Routes étroites en campagne.</span></div>
       </div>
 
@@ -1184,6 +1290,47 @@
     <div class="spacer"></div>
   </div>
 
+  <!-- CHECKLIST -->
+  <div class="day-view" id="view-checklist">
+    <div class="checklist-section">
+
+      <div style="padding: 20px 0 4px;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:700;color:var(--green);">À ne pas oublier</div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:4px;">Coche au fur et à mesure ✔</div>
+        <div class="check-progress" style="margin-top:12px;">
+          <div class="check-bar"><div class="check-bar-fill" id="progress-bar" style="width:0%"></div></div>
+          <span class="check-count" id="progress-text">0 / 14</span>
+        </div>
+      </div>
+
+      <div class="check-card">
+        <div class="check-card-title">📄 Documents</div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Passeport / CNI</span></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Permis de conduire</span></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Confirmation réservations hôtels</span></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Confirmation Flizzr (voiture)</span></div>
+      </div>
+
+      <div class="check-card">
+        <div class="check-card-title">🎒 Affaires pratiques</div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Adaptateur prise UK type G ⚠️</span></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Vêtements imperméables</span></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Chargeur voiture / batterie externe</span></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Écouteurs</span></div>
+      </div>
+
+      <div class="check-card">
+        <div class="check-card-title">📱 Avant de partir</div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Télécharger Google Maps offline Irlande</span></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Réserver Guinness ou Jameson</span></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Réserver hôtel Galway</span></div>
+        <div class="check-item" onclick="toggle(this)"><div class="check-box"><span class="check-tick">✓</span></div><span class="check-label">Prévenir sa banque pour l'étranger</span></div>
+      </div>
+
+    </div>
+    <div class="spacer"></div>
+  </div>
+
 </div>
 
 <script>
@@ -1193,9 +1340,22 @@ function showTab(id) {
   document.getElementById('view-' + id).classList.add('active');
   document.getElementById('tab-' + id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  // scroll nav btn into view
   const btn = document.getElementById('tab-' + id);
   btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+}
+
+const TOTAL = 12;
+
+function toggle(el) {
+  el.classList.toggle('done');
+  updateProgress();
+}
+
+function updateProgress() {
+  const done = document.querySelectorAll('.check-item.done').length;
+  const total = document.querySelectorAll('.check-item').length;
+  document.getElementById('progress-bar').style.width = (done / total * 100) + '%';
+  document.getElementById('progress-text').textContent = done + ' / ' + total;
 }
 </script>
 </body>
